@@ -108,7 +108,7 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 						
 			$sql = 'select 
 					a.building_code, a.year_month_code, 
-					aa.status_code, aa.verify_fullname, aa.verify_position,
+					aa.status_code, aa.verify_fullname, aa.verify_position, aa.verify_time, 
 					b.name as building_name,
 					c.name as year_month_name,
 					d.name as status_name 
@@ -318,21 +318,15 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 									<td></td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td colspan="4"></td>
 									<td colspan="4" style="text-align: center; ">										
 										'.$hr['verify_fullname'].'
 									</td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td colspan="4" style="font-size: 12px;">ตรวจถูกต้องเมื่อ : '.$hr['verify_time'].', บันทึกอนุมัติเมื่อ : '.$hr['approve_time'].'</td>
 									<td colspan="4" style="text-align: center;">
-										'.$hr['verify_position'].'
+										'.$hr['verify_position'].'										
 									</td>
 								</tr>
 							</table>

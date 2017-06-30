@@ -9,7 +9,7 @@
 
 		$sql = '';
 		
-		$result = mysqli_query($db, "update rtarfwen_t_duty_headers set status='V' where id=$hdr_id ");
+		$result = mysqli_query($db, "update rtarfwen_t_duty_headers set status='V', verify_time=now(), verify_by_id =".$username.", remark='' where id=$hdr_id ");
 		
 		$json = '';		
 		if ($result) {

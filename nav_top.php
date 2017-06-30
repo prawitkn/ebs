@@ -1,3 +1,16 @@
+<?php 
+	$sql = "
+			select * from rtarfwen_m_buildings where code=".$_SESSION['user_building_code']."  limit 1 						
+			";
+	$ses_sql = mysqli_query($db,$sql);		
+	$t1 = mysqli_fetch_array($ses_sql);
+	
+	$sql = "
+			select * from rtarfwen_m_orgs where code=".$_SESSION['user_org_code']."  limit 1 						
+			";
+	$ses_sql = mysqli_query($db,$sql);		
+	$t2 = mysqli_fetch_array($ses_sql);
+?>
 <div class="container">
  <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,8 +43,16 @@
             </li>-->
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" ><label class="color: blue;!important "><?php echo $fullname; ?></label></a></li>
-            <li><a href="logout.php">ออกจากระบบ</a></li>
+			<li><a href="#" ><label style="color: red;!important "><?php echo 'สิทธิผู้ใช้ : อาคาร '.$t1['name'].',&nbsp;หน่วย '.$t2['name']; ?></label></a></li>
+			<li class="dropdown">
+              <a href="#" class="dropdown-toggle" style="color: blue;!important " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $fullname; ?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+				<li><a href="user_change_pw.php">เปลี่ยนรหัสผ่าน</a></li>
+				<li role="separator" class="divider"></li>
+                <li><a href="logout.php">ออกจากระบบ</a></li>
+              </ul>
+            </li>
+            
           </ul>
         </div><!--/.nav-collapse -->
       </div>

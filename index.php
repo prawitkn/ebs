@@ -38,6 +38,7 @@ include('config.php');
 		<fieldset class="scheduler-border">
 			<legend class="scheduler-border">เจ้าหน้าที่ กสบ.สบ.ทหาร</legend>  
 			 <div class="col-md-12 text-center"> 
+				<a href="admin_change_right.php" class="btn btn-warning btn-block"><span class="glyphicon glyphicon-retweet"></span>&nbsp;&nbsp;เปลี่ยนสิทธิการใช้งานระบบฯ</a><br/>
 				<a href="m_users.php" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;กำหนดผู้ใช้ระบบ</a><br/>
 				<a href="create_holiday.php" class="btn btn-primary btn-block" ><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;กำหนดวันหยุดราชการ</a><br/>
 				<a href="create_rtarfwen_monthly.php" class="btn btn-primary btn-block" ><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;สร้างตารางเวร รปภ.บก.ทท. ประจำเดือน</a><br/>

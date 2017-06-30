@@ -17,7 +17,7 @@ include('config.php');
 	<?php include('nav_top.php'); ?>
 
 
-<h3>เจ้าหน้าที่ กสบ.สบ.ทหาร เปลี่ยนสิทธิโปรแกรม</h3>
+<h3>เจ้าหน้าที่ กสบ.สบ.ทหาร เปลี่ยนสิทธิการใช้งานระบบฯ</h3>
  <form action = "blinding_mapping_orgs.php" method = "post" class="form-horizontal">
 
  <div class="form-group">

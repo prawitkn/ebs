@@ -71,9 +71,9 @@ include('config.php');
 				?>" method = "post" style="width: 350px; margin: 0 auto;">		
 		<h6 class="form-signin-heading" style="color: red;"><?php echo $msg; ?></h6>
 		<label for="inputUsername" class="sr-only">Username</label>
-		<input id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+		<input id="inputUsername" name="username" class="form-control" placeholder="Username" required="" autofocus="" autocomplete="off">
 		<label for="inputPassword" class="sr-only">Password</label>
-		<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+		<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="" autocomplete="off">
 		<br/>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">เข้าสู่ระบบ</button>
 	  </form>

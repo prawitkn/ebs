@@ -88,30 +88,39 @@ include('inc_helper.php');
 				</p>
 			</div><!-- row-->
 			<?php
-				$sql = '
+				$sql = "
 						select
 						b.org_code,
 						d.name as org_name,
 						b.status_code,
+						case b.status_code 
+							when 'B' then 'เริ่มต้น'
+							when 'S' then 'ยืนยันข้อมูลแล้ว'
+							when 'V' then 'ตรวจถูกต้องแล้ว'
+							when 'C' then 'บันทึกอนุมัติแล้ว'
+						end as status_name,
 						b.remark
 						from rtarfwen_t_duty_headers a
 						inner join rtarfwen_t_duty_orgs b on a.id=b.hdr_id
 						left join rtarfwen_m_orgs d on b.org_code=d.code					
-						where a.year_month_code='.$year_month_code.' and a.building_code='.$building_code.'
+						where a.year_month_code=".$year_month_code." and a.building_code=".$building_code."
 						
 						order by b.id, b.org_code asc					
-						';
+						";
 			   $result_sub = mysqli_query($db,$sql);	
 			   $sub = mysqli_fetch_array($result_sub);		
-			   
+			   $i = 0;
 				while($r = mysqli_fetch_array($result_sub)) {
-					if($r['status_code'] <> 'C'){
-						echo '<label style="color: red; font-weight: bold;">';
-					}else{
-						echo '<label style="color: green;">';
-					}
-					echo $r['org_code'].' - '.$r['org_name'].' '.$r['status_code'].'&nbsp;&nbsp;&nbsp;';
+					echo ($i==0?'':'<label style="color: black; font-weight: bold;">&nbsp;/&nbsp;</label>');
+					switch($r['status_code']){
+						case 'S': echo '<label style="color: blue; font-weight: bold;">'; break;
+						case 'V': echo '<label style="color: blue; font-weight: bold;">'; break;
+						case 'C': echo '<label style="color: green; font-weight: bold;">'; break;
+						default: echo '<label style="color: red; font-weight: bold;">'; break;	//B
+					}				
+					echo $r['org_name'].' '.$r['status_name'];
 					echo '</label>';
+					$i+=1;
 				}
 			?>
 <div class="row" style="">
@@ -122,7 +131,7 @@ include('inc_helper.php');
 		if( $hdr['status']=='B' and ($user_is_administrator or $user_is_building_major) ){
 			echo '<li><a href="#t02" data-toggle="tab">ยืนยันการบันทึกข้อมูลทั้งหมด</a></li>';
 		}
-		if( $hdr_org['status']=='S' and ($user_is_administrator or $user_is_checker) ){
+		if( $hdr['status']=='S' and ($user_is_administrator or $user_is_checker) ){
 			echo '<li><a href="#t03" data-toggle="tab">ส่งกลับเพื่อแก้ไข</a></li>';
 			echo '<li><a href="#t04" data-toggle="tab">ตรวจถูกต้อง</a></li>';
 		}
@@ -162,7 +171,8 @@ if( $hdr['status']=='B' ){
 	</div>
 	<?php
 }
-if( $hdr['status']=='S'  ){
+
+if($hdr['status']=='S'){
 	?>
 	<div id="t03" class="tab-pane" style="margin: 5px">		
 		<div class="row" style="padding-bottom: 5px">
@@ -184,6 +194,7 @@ if( $hdr['status']=='S'  ){
 	</div>
 <?php
 }
+
 if( $hdr['status']=='V'  ){
 	?>
 	<div id="t05" class="tab-pane" style="margin: 5px">																																													

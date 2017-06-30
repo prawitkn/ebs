@@ -152,132 +152,94 @@ include('inc_helper.php');
 							'.to_thaiyear_short_date($r['date']).'</br>
 							<span style="font-weight: bold">'.$r['remark'].'</span>
 							</td>';
+							
+					$is_allow_edit = false;
+					
+					if($user_is_administrator){
+						$is_allow_edit = true;
+					}					
+					if(!$user_is_administrator and $hdr['status'] == 'B' and date("d")== 30){
+						if($r['org_code'] == $user_org_code){ $is_allow_edit = true; }
+					}
+					
 					echo '	<td>'.$r['org_abb'].'</br>
 							<input type="hidden" id="hid_set_no" value="1" />
 							<input type="hidden" id="hid_org_code-'.(string)$icount.'" value="'.$r['org_code'].'" />';
-					if($hdr['status'] <> 'B'){
-						//is C and only KSB admin.
-						if($user_is_administrator){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid'].'" />
+					if($is_allow_edit){
+						echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid'].'" />
 								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname'].'" /><br/>
 								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no'].'" /><br/>
 								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
 								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
 								</td>';
-						}else{
-							echo $r['fullname'].'<br/>'
-								.$r['mobile_phone_no'].'
-								</td>';
-						}
 					}else{
-						if($r['org_code'] == $user_org_code){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname'].'<br/>'
+						echo $r['fullname'].'<br/>'
 								.$r['mobile_phone_no'].'
 								</td>';
-						}
 					}
+					
 					//2
+					$is_allow_edit = false;
+					if(!$user_is_administrator and $hdr['status'] == 'B' and date("d")== 30){
+						if($r['org_code2'] == $user_org_code){ $is_allow_edit = true; }
+					}
 					echo '	<td>'.$r['org_abb2'].'<br/>
 								<input type="hidden" id="hid_set_no" value="2" />
 								<input type="hidden" id="hid_org_code2-'.(string)$icount.'" value="'.$r['org_code2'].'" />';
-					if($hdr['status'] <> 'a'){
-						//is C and only KSB admin.
-						if($user_is_administrator){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid2'].'" />
+					if($is_allow_edit){
+						echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid2'].'" />
 								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname2'].'" /><br/>
 								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no2'].'" /><br/>
 								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
 								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
 								</td>';
-						}else{
-							echo $r['fullname2'].'<br/>'
-								.$r['mobile_phone_no2'].'
-								</td>';
-						}
 					}else{
-						if($r['org_code2'] == $user_org_code){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid2'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname2'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no2'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname2'].'<br/>'
+						echo $r['fullname2'].'<br/>'
 								.$r['mobile_phone_no2'].'
 								</td>';
-						}
 					}
+					
 					//3
 					echo '	<td>'.$r['org_abb3'].'<br/>
 								<input type="hidden" id="hid_set_no" value="3" />
 								<input type="hidden" id="hid_org_code3-'.(string)$icount.'" value="'.$r['org_code3'].'" />';
-					if($hdr['status'] <> 'B'){
-						//is C and only KSB admin.
-						if($user_is_administrator){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid3'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname3'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no3'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname3'].'<br/>'
-								.$r['mobile_phone_no3'].'
-								</td>';
-						}
-					}else{
-						if($r['org_code3'] == $user_org_code){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid3'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname3'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no3'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname3'].'<br/>'
-								.$r['mobile_phone_no3'].'
-								</td>';
-						}
+					$is_allow_edit = false;
+					if(!$user_is_administrator and $hdr['status'] == 'B' and date("d")== 30){
+						if($r['org_code3'] == $user_org_code){ $is_allow_edit = true; }
 					}
+					
+					if($is_allow_edit){
+						echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid3'].'" />
+							<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname3'].'" /><br/>
+							<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no3'].'" /><br/>
+							<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
+							<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
+							</td>';
+					}else{
+						echo $r['fullname3'].'<br/>'
+							.$r['mobile_phone_no3'].'
+							</td>';
+					}
+					
 					//4
 					echo '	<td>'.$r['org_abb4'].'<br/>
 								<input type="hidden" id="hid_set_no" value="4" />
 								<input type="hidden" id="hid_org_code4-'.(string)$icount.'" value="'.$r['org_code4'].'" />';
-					if($hdr['status'] <> 'B'){
-						//is C and only KSB admin.
-						if($user_is_administrator){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid4'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname4'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no4'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname4'].'<br/>'
-								.$r['mobile_phone_no4'].'
-								</td>';
-						}
+					$is_allow_edit = false;
+					if(!$user_is_administrator and $hdr['status'] == 'B' and date("d")== 30){
+						if($r['org_code4'] == $user_org_code){ $is_allow_edit = true; }
+					}
+					if($is_allow_edit){
+						echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid4'].'" />
+							<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname4'].'" /><br/>
+							<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no4'].'" /><br/>
+							<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
+							<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
+							</td>';
 					}else{
-						if($r['org_code4'] == $user_org_code){
-							echo '<input type="hidden" id="hid_mid-'.(string)$icount.'" value="'.$r['mid4'].'" />
-								<input type="text" id="txt_name-'.(string)$icount.'" class="txt_name" value="'.$r['fullname4'].'" /><br/>
-								<input type="text" id="txt_mobile_phone_no-'.(string)$icount.'" value="'.$r['mobile_phone_no4'].'" /><br/>
-								<a class="btn btn-primary" name="btn_submit_cell" >บันทึก</a>&nbsp;
-								<a class="btn btn-primary" name="btn_submit_cell_remove" >ลบ</a>&nbsp;
-								</td>';
-						}else{
-							echo $r['fullname4'].'<br/>'
-								.$r['mobile_phone_no4'].'
-								</td>';
-						}
+						echo $r['fullname4'].'<br/>'
+							.$r['mobile_phone_no4'].'
+							</td>';
 					}
 					echo '</tr>';
 					$icount +=1;

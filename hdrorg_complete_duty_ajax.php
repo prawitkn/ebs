@@ -10,7 +10,7 @@
 
 		$sql = '';
 		
-		$result = mysqli_query($db, "update rtarfwen_t_duty_orgs set status_code='C' where id=$hdr_org_id and status_code='V' ");
+		$result = mysqli_query($db, "update rtarfwen_t_duty_orgs set status_code='C', approve_time=now(), approve_by_id=".$username." where id=$hdr_org_id and status_code='V' ");
 		
 		$json = '';		
 		if ($result) {

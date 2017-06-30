@@ -277,10 +277,7 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 									</td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td colspan="4" style="font-size: 12px;">ตรวจถูกต้องเมื่อ : '.$hr['verify_time'].', บันทึกอนุมัติเมื่อ : '.$hr['approve_time'].'</td>
 									<td colspan="4" style="text-align: center;">
 										'.$hr['verify_position'].'
 									</td>

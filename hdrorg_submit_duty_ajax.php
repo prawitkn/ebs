@@ -41,7 +41,7 @@
 		}*/
 		
 		$sql = '';
-		$sql = "update rtarfwen_t_duty_orgs set status_code='S', verify_time=now(), verify_fullname='".$verify_fullname."', verify_position='".$verify_position."' where id=".$hdr_org_id;
+		$sql = "update rtarfwen_t_duty_orgs set status_code='S', submit_time=now(), submit_by_id=".$username.", verify_fullname='".$verify_fullname."', verify_position='".$verify_position."' where id=".$hdr_org_id;
 		$result = mysqli_query($db, $sql);
 		
 	

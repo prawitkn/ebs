@@ -124,22 +124,21 @@ include('inc_helper.php');
 
 if( $hdr_org['status_code']=='B' ){
 	$is_display_checker == false;
-	echo $user_org_code;
-	echo $building_code;
+
 	if( $user_org_code <> '0' ){
 		$is_display_checker == true;
 	}
 	
-	echo ($is_display_checker ? 't' : 'f');
+	//echo ($is_display_checker ? 't' : 'f');
 	?>
 	<div id="t02" class="tab-pane" style="margin: 5px">	
-		<div class="row" style="padding-bottom: 5px;<?php echo ( $is_display_checker ? '':'display: none;'); ?>">
+		<div class="row" style="padding-bottom: 5px;">
 			<div class="col-md-2" style="font-weight: bold; text-align: right;">ยศ ชื่อ นามสกุล</div>
 			<div class="col-md-4">
 				<input type="text" class="form-control txt_name" id="txt_verify_fullname" />
 			</div>
 		</div>
-		<div class="row" style="padding-bottom: 5px;<?php echo ( $is_display_checker ? '':'display: none;'); ?>">
+		<div class="row" style="padding-bottom: 5px;">
 			<div class="col-md-2" style="font-weight: bold; text-align: right;">ตำแหน่ง</div>
 			<div class="col-md-4">
 				<textarea  class="form-control"id="txt_verify_position" ></textarea>

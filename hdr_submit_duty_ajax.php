@@ -11,7 +11,7 @@
 		//$building_code=$_POST['building_code'];
 		
 		$sql = '';
-		$sql = "update rtarfwen_t_duty_headers set status='S', verify_fullname='".$verify_fullname."', verify_position='".$verify_position."' where id=$hdr_id";
+		$sql = "update rtarfwen_t_duty_headers set status='S', submit_time=now(), submit_by_id=".$username.", verify_fullname='".$verify_fullname."', verify_position='".$verify_position."' where id=$hdr_id";
 		$result = mysqli_query($db, $sql);
 		
 		//$result = mysqli_query($db, "update rtarfwen_t_duty_headers set status='S', verify_fullname='".$verify_fullname."', verify_position='".$verify_position."' where id=$hdr_id ");
