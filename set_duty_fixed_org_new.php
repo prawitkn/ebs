@@ -474,9 +474,8 @@ $(document).ready(function(){
 					break;
 			case '4' : 
 			case '5' : 
+			case '7' :
 			case '6' : print_url = 'prints_org3.php?pnk=0&hdr_id=';
-					break;
-			case '7' : print_url = 'prints_org3.php?pnk=0&hdr_id=';	//สส.ทหาร
 					break;
 			case '8' : print_url = 'prints_org5.php?pnk=0&hdr_id=';	//อาคารสันติภาพ
 					break;
@@ -491,19 +490,18 @@ $(document).ready(function(){
 		var print_url = '';
 		switch($building_code){
 			case '1' :
-			case '9' : print_url = 'prints1.php?hdr_id=';	//บก.ทท. 	สน.บก.ทท.
+			case '9' : print_url = 'prints1.php?pnk=1&hdr_id=';	//บก.ทท. 	สน.บก.ทท.
 					break;
-			case '3' : print_url = 'prints2.php?hdr_id=';
+			case '3' : print_url = 'prints2.php?pnk=1&hdr_id=';
 					break;
 			case '4' : 
 			case '5' : 
-			case '6' : print_url = 'prints3.php?hdr_id=';
+			case '7' :
+			case '6' : print_url = 'prints3.php?pnk=1&hdr_id=';
 					break;
-			case '7' : print_url = 'prints3.php?hdr_id=';	//สส.ทหาร
+			case '8' : print_url = 'prints5.php?pnk=1&hdr_id=';	//อาคารสันติภาพ
 					break;
-			case '8' : print_url = 'prints5.php?hdr_id=';	//อาคารสันติภาพ
-					break;
-			case '10' : print_url = 'prints6.php?hdr_id=';	//สนพ.
+			case '10' : print_url = 'prints6.php?pnk=1&hdr_id=';	//สนพ.
 					break;
 		}
 		window.open(print_url + $hdr_id,'_blank');

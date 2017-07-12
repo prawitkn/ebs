@@ -171,9 +171,8 @@ include('config.php');
 					break;
 			case '4' : 
 			case '5' :
+			case '7' :
 			case '6' : print_url = 'prints3.php?pnk=1&hdr_id=';
-					break;
-			case '7' : print_url = 'prints4.php?pnk=1&hdr_id=';	//สส.ทหาร
 					break;
 			case '8' : print_url = 'prints5.php?pnk=1&hdr_id=';	//อาคารสันติภาพ
 					break;

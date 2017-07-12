@@ -98,8 +98,7 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 // Set some content to print
 
 		
-		$hdr_id = $_GET['hdr_id'];
-						
+		$hdr_id = $_GET['hdr_id'];						
 			$sql = 'select a.*,
 					b.name as building_name,
 					c.name as year_month_name,
@@ -132,15 +131,15 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 			$dtl = mysqli_query($db,$sql);
 			
 			$rowcount=mysqli_num_rows($dtl);		 
-		   
+		   $sc = array('P', 'C');
 		   if($rowcount>0){
 				$pdf->AddPage('P');
 				// นายทหารเวรผู้ใหญ่
 				$html = '';
-				$html .= ($hr['status'] <> 'C' ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
+				$html .= ( !in_array($hr['status'], $sc) ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
 				//Header
+				$pnk = '';
 				if($_GET['pnk']==1){
-					$pnk = '';
 					switch($hr['building_code']){
 						case 1 : $pnk='ผนวก ก'; break;
 						case 2 : $pnk='ผนวก x'; break;
@@ -170,9 +169,7 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 						</table>';
 				}else{
 					$html .= '<div style="text-align: center; font-weight: bold;">บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวรรักษาความปลอดภัยและเวรประชาสัมพันธ์ ประจำ'.$hr['building_name'].'<br/>ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']).'</div>';				
-				}				
-				
-				//$html .= '<div style="text-align: center; font-weight: bold;">บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวรรักษาความปลอดภัยและเวรประชาสัมพันธ์ ประจำ'.$hr['building_name'].'<br/>ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']).'</div>';				
+				}
 				$html .= '<table border="1">
 							<thead>
 								<tr>

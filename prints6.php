@@ -131,14 +131,46 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 			$dtl = mysqli_query($db,$sql);
 			
 			$rowcount=mysqli_num_rows($dtl);		 
-		   
+		   $sc = array('P', 'C');
 		   if($rowcount>0){
 								
 				// นายทหารเวร เสมียนเวร
 				$pdf->AddPage('L');				
 				$html = '';
-				$html .= ($hr['status'] <> 'C' ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
-				$html .= '<div style="text-align: center; font-weight: bold;">บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวรรักษาความปลอดภัยและเวรประชาสัมพันธ์ ประจำ'.$hr['building_name'].'<br/>ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']).'</div>';				
+				$html .= ( !in_array($hr['status'], $sc) ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
+				//Header
+				$pnk = '';
+				if($_GET['pnk']==1){
+					switch($hr['building_code']){
+						case 1 : $pnk='ผนวก ก'; break;
+						case 2 : $pnk='ผนวก x'; break;
+						case 3 : $pnk='ผนวก ข'; break;
+						case 4 : $pnk='ผนวก ค'; break;
+						case 5 : $pnk='ผนวก ง'; break;
+						case 6 : $pnk='ผนวก จ'; break;
+						case 7 : $pnk='ผนวก ฉ'; break;
+						case 8 :  $pnk='ผนวก ช'; break;
+						case 9 : $pnk='ผนวก ซ'; break;
+						case 10 : $pnk='ผนวก ด'; break;
+						default : $pnk='ผนวก X'; break;
+					}
+					$html .= '<br/><table style="width: 100%;">
+							<tr>
+								<td style="width: 50px;">'.$pnk.'</td>
+								<td style="width: 600px;">บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวรรักษาความปลอดภัยและเวรประชาสัมพันธ์ ประจำ'.$hr['building_name'].'</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']).'</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>ประกอบคำสั่ง บก.ทท. (เฉพาะ) ที่</td>
+							</tr>
+						</table>';
+				}else{
+					$html .= '<div style="text-align: center; font-weight: bold;">บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวรรักษาความปลอดภัยและเวรประชาสัมพันธ์ ประจำ'.$hr['building_name'].'<br/>ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']).'</div>';				
+				}				
 				$html .= '<table border="1">
 							<thead>
 								<tr>

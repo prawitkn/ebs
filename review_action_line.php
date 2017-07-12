@@ -27,7 +27,7 @@ include('inc_helper.php');
 	<?php include('nav_top.php'); ?>
 
 
-<h3>กำหนดรายชื่อ รปภ.อาคารบริวาร</h3>
+<h3>เส้นทางการปฏิบัติการส่งรายชื่อเวร</h3>
 
 	<?php
 		if(isset($_POST['year_month_code']) && !empty($_POST['year_month_code']) && isset($_POST['building_code']) && !empty($_POST['building_code'])){

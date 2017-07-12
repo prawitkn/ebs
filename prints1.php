@@ -119,12 +119,12 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 			$dtl = mysqli_query($db,$sql);
 			
 			$rowcount=mysqli_fetch_row($dtl);		 
-		   
+		   $sc = array('P', 'C');
 		   if($rowcount>0){
 				$pdf->AddPage('P');
 				// นายทหารเวรผู้ใหญ่
 				$html = '';		
-				$html .= ( ($hr['status']<>'C' or $hr['status']<>'V') ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');							
+				$html .= ( !in_array($hr['status'], $sc) ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
 				//Header
 				if($_GET['pnk']==1){
 					$pnk = '';

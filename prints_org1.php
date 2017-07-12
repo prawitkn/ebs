@@ -94,7 +94,8 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 		
 			$sql = 'select 
 					a.building_code, a.year_month_code, 
-					aa.status_code, aa.verify_fullname, aa.verify_position,
+					aa.status_code, aa.verify_fullname, aa.verify_position, aa.verify_time,
+					aa.approve_time, 
 					b.name as building_name,
 					c.name as year_month_name,
 					d.name as status_name 
@@ -128,14 +129,13 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 			$dtl = mysqli_query($db,$sql);
 			
 			$rowcount=mysqli_fetch_row($dtl);		 
-		   
+		   $sc = array('P', 'C');
 		   if($rowcount>0){
 				$pdf->AddPage('P');
 				// นายทหารเวรผู้ใหญ่
 				$html = '';		
-					$html .= ( ($hr['status']<>'C' or $hr['status']<>'V') ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');			
-				$html .= '<div style="text-align: center; font-weight: bold;">';				
-				
+				$html .= ( !in_array($hr['status_code'], $sc) ? '<label style="color: red;">สถานะ : '.$hr['status_name'].'</label>' : '');
+				$html .= '<div style="text-align: center; font-weight: bold;">';								
 				$html .= 'บัญชีรายชื่อข้าราชการปฏิบัติหน้าที่เวร  รปภ. ประจำ'.$hr['building_name'].' ประจำเดือน '.toThaiShortMonthYear($hr['year_month_name']);				
 				$html .= '</div>';
 				$html .= '<table border="1">
@@ -268,10 +268,7 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 									<td></td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td colspan="4"></td>
 									<td colspan="4" style="text-align: center; ">										
 										'.$hr['verify_fullname'].'
 									</td>
@@ -279,7 +276,7 @@ $pdf->SetFont('THSarabun', '', 16, '', true);
 								<tr>
 									<td colspan="4" style="font-size: 12px;">ตรวจถูกต้องเมื่อ : '.$hr['verify_time'].', บันทึกอนุมัติเมื่อ : '.$hr['approve_time'].'</td>
 									<td colspan="4" style="text-align: center;">
-										'.$hr['verify_position'].'
+										'.$hr['verify_position'].'										
 									</td>
 								</tr>
 							</table>
